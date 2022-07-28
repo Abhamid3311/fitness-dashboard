@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { PieChart } from 'react-minimal-pie-chart';
@@ -9,6 +9,7 @@ import { BsChevronRight, BsBell } from 'react-icons/bs';
 import './UserRow.css';
 
 const UserRow = ({ user }) => {
+
   const {
     userId,
     name,
@@ -28,14 +29,21 @@ const UserRow = ({ user }) => {
     fatTarget,
   } = user;
 
-  const percenrage = (stepsWalked / stepsTarget) * 100;
+  const [stepTarget, setStepTarget] = useState(stepsTarget);
+  const [caloriesTarget, setCaloriesTarget] = useState(calorieTarget);
 
+  //Steps Parcentage
+  const percenrage = (stepsWalked / stepTarget) * 100;
+
+  //Calorie Pie data
   const data =
     [
       { title: 'One', value: 10, color: '#B93160' },
       { title: 'Two', value: 15, color: '#EED180' },
       { title: 'Three', value: 20, color: '#B2A4FF' },
     ];
+
+
 
 
   return (
@@ -67,10 +75,16 @@ const UserRow = ({ user }) => {
             </CircularProgressbarWithChildren>;
           </div>
           <div>
-            <button class="btn btn-xs w-full  font-bold">+</button>
-            <h2 className="text-2xl font-bold ">{stepsTarget}</h2>
-            <p className="font-semibold ">target</p>
-            <button class="btn btn-xs w-full font-bold">-</button>
+            <button
+              class="btn btn-xs w-full  font-bold"
+              onClick={() => setStepTarget((stepsTarget) => stepsTarget + 500)}>+</button>
+            <h2 className="text-2xl font-bold ">{stepTarget}</h2>
+            <p className="font-semibold -mt-2">target</p>
+
+            <button
+              class="btn btn-xs w-full font-bold"
+              onClick={() => setStepTarget((stepsTarget) => stepsTarget - 500)}
+            >-</button>
           </div>
         </div>
       </td>
@@ -108,25 +122,34 @@ const UserRow = ({ user }) => {
                 }}
                 labelPosition={63}
                 lineWidth={20}
-                label={({ dataEntry }) =>
-                  `${dataEntry.title} ${Math.round(dataEntry.percentage)}%`
-                }
+                label={() => {
+                  return "Caloried" 
+                }}
+
+
                 data={data}
               />
             </div>
             <div>
-              <button class="btn btn-xs w-full  font-bold">+</button>
-              <h2 className="text-2xl font-bold ">{stepsTarget}</h2>
-              <p className="font-semibold ">target</p>
-              <button class="btn btn-xs w-full font-bold">-</button>
+              <button
+                class="btn btn-xs w-full  font-bold"
+                onClick={() => setCaloriesTarget((calorieTarget) => calorieTarget + 100)}
+              >+</button>
+              <h2 className="text-2xl font-bold ">{caloriesTarget}</h2>
+              <p className="font-semibold -mt-2">target</p>
+
+              <button
+                class="btn btn-xs w-full font-bold"
+                onClick={() => setCaloriesTarget((calorieTarget) => calorieTarget - 100)}
+              >-</button>
             </div>
           </div>
-          <button class="btn  h-20 ml-3"><BsChevronRight /></button>
+          <button class="btn h-20 ml-3"><BsChevronRight /></button>
         </div>
       </td>
 
       <td>
-        <button class="btn  h-20 ml-3 bg-emerald-400 text-black text-2xl font-bold" ><BsBell /></button>
+        <button class="btn h-20  ml-3 bg-emerald-400 text-black text-2xl font-bold" ><BsBell /></button>
       </td>
     </tr>
   );
