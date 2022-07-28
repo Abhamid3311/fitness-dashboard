@@ -24,24 +24,26 @@ const Dashboard = () => {
 
               <th>
                 <div className="flex flex-row items-center">
-                  <MdOutlineDirectionsWalk className="text-3xl" />
+                  <MdOutlineDirectionsWalk className="text-3xl mr-2" />
                   <span className="text-2xl">Steps</span>
                 </div>
               </th>
 
               <th>
                 <div className="flex flex-row items-center">
-                  <BiDumbbell className="text-3xl" />
+                  <BiDumbbell className="text-3xl mr-3" />
                   <span className="text-2xl">Workout</span>
                 </div>
               </th>
 
               <th>
                 <div className="flex flex-row items-center">
-                  <MdFastfood className="text-3xl" />
+                  <MdFastfood className="text-3xl mr-3" />
                   <span className="text-2xl">Nutrition</span>
                 </div>
               </th>
+
+              <th></th>
             </tr>
           </thead>
           <tbody >
